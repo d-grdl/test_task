@@ -52,9 +52,14 @@
                 </div>
             </div>
         </form>
-        <upload-images-component @getImages="attachImages($event)" @loadComplete="($event)=>{imagesLoaded=true}" @loadStart="($event)=>{imagesLoaded=false}"></upload-images-component>
+        <upload-images-component @getImages="attachImages($event)" @loadComplete="($event)=>{imagesLoaded=true}" @loadStart="($event)=>{imagesLoaded=false}" @uploadErrors="($event)=>{uploadErrors=$event}"></upload-images-component>
         <div v-if="errors.images">
             <span v-for="error in errors.images" class="text-danger">
+                {{error}}
+            </span>
+        </div>
+        <div v-if="uploadErrors.files" class="pl-3 pb-3">
+            <span v-for="error in uploadErrors.files" class="text-danger">
                 {{error}}
             </span>
         </div>
@@ -86,6 +91,7 @@ export default {
             errors: '',
             content: '',
             imagesLoaded: true,
+            uploadErrors: '',
         }
     },
     mounted() {
