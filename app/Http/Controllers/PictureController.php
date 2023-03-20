@@ -4,11 +4,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Picture;
-use Illuminate\Http\Request;
+use App\Requests\UploadImagesRequest;
 
 class PictureController extends Controller
 {
-    public function upload(Request $request)
+    public function upload(UploadImagesRequest $request)
     {
        if ($request->file() !== null) {
             $picture = new Picture();
