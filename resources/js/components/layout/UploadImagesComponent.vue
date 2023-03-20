@@ -15,8 +15,9 @@
     export default {
         data: () => ({
             formData: {'files': null},
+            errors: [],
         }),
-        emits: ['getImages', 'loadStart', 'loadComplete'],
+        emits: ['getImages', 'loadStart', 'loadComplete', 'uploadErrors'],
         methods: {
             async uploadImages() {
                 this.$emit('loadStart', true);
@@ -27,6 +28,9 @@
                         const headers = {'content-type': 'multipart/form-data'};
                         await window.axios.post('/api/picture/upload', this.formData, {headers}).then(res => {
                             images.push(res.data);
+                        }).catch(error => {
+                            this.errors = error.response.data.errors;
+                            this.$emit('uploadErrors', this.errors)
                         });
                     }
                     this.$emit('getImages', images);
