@@ -10,8 +10,7 @@ class PictureController extends Controller
 {
     public function upload(Request $request)
     {
-        dd($request->file());
-        if ($request->file() !== null) {
+       if ($request->file() !== null) {
             $picture = new Picture();
 
             $picture->path = '/' . $request->file('files')->store('/images', ['disk' => 'file_uploads']);
