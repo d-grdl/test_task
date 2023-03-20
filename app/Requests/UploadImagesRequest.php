@@ -9,7 +9,7 @@ class UploadImagesRequest extends FormRequest
     public function rules()
     {
         return [
-            'files' => 'array',
+            'files' => 'mimes:jpg,jpeg,png',
         ];
     }
 }
